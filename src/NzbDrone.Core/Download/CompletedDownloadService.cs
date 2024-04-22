@@ -202,8 +202,8 @@ namespace NzbDrone.Core.Download
                 trackedDownload.Warn(statusMessages.ToArray());
                 
                 // SendManualInteractionRequiredNotification(trackedDownload);
-                _
-                failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
+                
+                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
             }
         }
 
