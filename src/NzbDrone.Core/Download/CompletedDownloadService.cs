@@ -35,7 +35,7 @@ namespace NzbDrone.Core.Download
         private readonly ISeriesService _seriesService;
         private readonly ITrackedDownloadAlreadyImported _trackedDownloadAlreadyImported;
         private readonly Logger _logger;
-        private readonly iFailedDownloadService _failedDownloadService;
+        private readonly IFailedDownloadService _failedDownloadService;
 
         public CompletedDownloadService(IEventAggregator eventAggregator,
                                         IHistoryService historyService,
