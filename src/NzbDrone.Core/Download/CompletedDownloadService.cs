@@ -35,6 +35,7 @@ namespace NzbDrone.Core.Download
         private readonly ISeriesService _seriesService;
         private readonly ITrackedDownloadAlreadyImported _trackedDownloadAlreadyImported;
         private readonly Logger _logger;
+        private readonly iFailedDownloadService _failedDownloadService;
 
         public CompletedDownloadService(IEventAggregator eventAggregator,
                                         IHistoryService historyService,
@@ -43,6 +44,7 @@ namespace NzbDrone.Core.Download
                                         IParsingService parsingService,
                                         ISeriesService seriesService,
                                         ITrackedDownloadAlreadyImported trackedDownloadAlreadyImported,
+                                        IFailedDownloadService failedDownloadService,
                                         Logger logger)
         {
             _eventAggregator = eventAggregator;
@@ -52,6 +54,7 @@ namespace NzbDrone.Core.Download
             _parsingService = parsingService;
             _seriesService = seriesService;
             _trackedDownloadAlreadyImported = trackedDownloadAlreadyImported;
+            _failedDownloadService = failedDownloadService;
             _logger = logger;
         }
 
