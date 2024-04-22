@@ -101,7 +101,7 @@ namespace NzbDrone.Core.Download
                 if (series == null)
                 {
                     trackedDownload.Warn("Series title mismatch; automatic import is not possible. Check the download troubleshooting entry on the wiki for common causes.");
-                    
+
                     // SendManualInteractionRequiredNotification(trackedDownload);
 
                     _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
@@ -115,7 +115,7 @@ namespace NzbDrone.Core.Download
                 if (seriesMatchType == SeriesMatchType.Id && releaseSource != ReleaseSourceType.InteractiveSearch)
                 {
                     trackedDownload.Warn("Found matching series via grab history, but release was matched to series by ID. Automatic import is not possible. See the FAQ for details.");
-                    
+
                     // SendManualInteractionRequiredNotification(trackedDownload);
 
                     _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
@@ -139,7 +139,7 @@ namespace NzbDrone.Core.Download
             if (trackedDownload.RemoteEpisode == null)
             {
                 trackedDownload.Warn("Unable to parse download, automatic import is not possible.");
-                
+
                 // SendManualInteractionRequiredNotification(trackedDownload);
 
                 _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
@@ -200,9 +200,9 @@ namespace NzbDrone.Core.Download
             if (statusMessages.Any())
             {
                 trackedDownload.Warn(statusMessages.ToArray());
-                
+
                 // SendManualInteractionRequiredNotification(trackedDownload);
-                
+
                 _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
             }
         }
