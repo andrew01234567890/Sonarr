@@ -79,13 +79,13 @@ namespace NzbDrone.Core.Download
             if (historyItem == null && trackedDownload.DownloadItem.Category.IsNullOrWhiteSpace())
             {
                 trackedDownload.Warn("Download wasn't grabbed by Sonarr and not in a category, Skipping.");
-                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                 return;
             }
 
             if (!ValidatePath(trackedDownload))
             {
-                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                 return;
             }
 
@@ -101,9 +101,9 @@ namespace NzbDrone.Core.Download
                 if (series == null)
                 {
                     trackedDownload.Warn("Series title mismatch; automatic import is not possible. Check the download troubleshooting entry on the wiki for common causes.");
-                    //SendManualInteractionRequiredNotification(trackedDownload);
+                    // SendManualInteractionRequiredNotification(trackedDownload);
 
-                    _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                    _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                     return;
                 }
 
@@ -114,9 +114,9 @@ namespace NzbDrone.Core.Download
                 if (seriesMatchType == SeriesMatchType.Id && releaseSource != ReleaseSourceType.InteractiveSearch)
                 {
                     trackedDownload.Warn("Found matching series via grab history, but release was matched to series by ID. Automatic import is not possible. See the FAQ for details.");
-                    //SendManualInteractionRequiredNotification(trackedDownload);
+                    // SendManualInteractionRequiredNotification(trackedDownload);
 
-                    _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                    _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                     return;
                 }
             }
@@ -130,16 +130,16 @@ namespace NzbDrone.Core.Download
 
             if (!ValidatePath(trackedDownload))
             {                
-                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                 return;
             }
 
             if (trackedDownload.RemoteEpisode == null)
             {
                 trackedDownload.Warn("Unable to parse download, automatic import is not possible.");
-                //SendManualInteractionRequiredNotification(trackedDownload);
+                // SendManualInteractionRequiredNotification(trackedDownload);
 
-                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                 return;
             }
 
@@ -153,7 +153,7 @@ namespace NzbDrone.Core.Download
 
             if (VerifyImport(trackedDownload, importResults))
             {                
-                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                 return;
             }
 
@@ -162,7 +162,7 @@ namespace NzbDrone.Core.Download
             if (importResults.Empty())
             {
                 trackedDownload.Warn("No files found are eligible for import in {0}", outputPath);
-                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                 return;
             }
 
@@ -173,7 +173,7 @@ namespace NzbDrone.Core.Download
                 if (firstResult.Result == ImportResultType.Rejected && firstResult.ImportDecision.LocalEpisode == null)
                 {
                     trackedDownload.Warn(new TrackedDownloadStatusMessage(firstResult.Errors.First(), new List<string>()));
-                    _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                    _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                     return;
                 }
             }
@@ -197,8 +197,8 @@ namespace NzbDrone.Core.Download
             if (statusMessages.Any())
             {
                 trackedDownload.Warn(statusMessages.ToArray());
-                //SendManualInteractionRequiredNotification(trackedDownload);
-                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.Id);
+                // SendManualInteractionRequiredNotification(trackedDownload);
+                _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
             }
         }
 
