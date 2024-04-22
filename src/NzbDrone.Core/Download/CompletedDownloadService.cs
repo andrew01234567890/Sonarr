@@ -131,7 +131,7 @@ namespace NzbDrone.Core.Download
             SetImportItem(trackedDownload);
 
             if (!ValidatePath(trackedDownload))
-            {                
+            {
                 _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                 return;
             }
@@ -155,7 +155,7 @@ namespace NzbDrone.Core.Download
                 trackedDownload.ImportItem);
 
             if (VerifyImport(trackedDownload, importResults))
-            {                
+            {
                 _failedDownloadService.MarkAsFailed(trackedDownload.DownloadItem.DownloadId);
                 return;
             }
